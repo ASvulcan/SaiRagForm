@@ -109,7 +109,7 @@ export function Contact() {
                 className="text-base md:text-lg font-medium"
                 style={{ color: "var(--text)" }}
               >
-                +91 98220 62460
+                +91 8668479379
               </p>
             </div>
 
