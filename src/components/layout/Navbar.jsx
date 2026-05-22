@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "wouter";
 import { useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
@@ -8,7 +8,10 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const [, setLocation] = useLocation();
+  const navRef = useRef(null);
+  const linkRefs = useRef({});
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -63,6 +66,21 @@ export function Navbar() {
     });
     return () => observer.disconnect();
   }, [isHome]);
+
+  // Animate underline indicator on active section change
+  useEffect(() => {
+    const nameMap = { home: "Home", about: "About", services: "Services", career: "Career", contact: "Contact" };
+    const name = nameMap[activeSection] || "Home";
+    const el = linkRefs.current[name];
+    if (el && navRef.current) {
+      const navRect = navRef.current.getBoundingClientRect();
+      const linkRect = el.getBoundingClientRect();
+      setIndicatorStyle({
+        left: linkRect.left - navRect.left,
+        width: linkRect.width,
+      });
+    }
+  }, [activeSection]);
 
   const isActive = (name) => {
     if (name === "Home" && location === "/") return activeSection === "home" || activeSection === "";
@@ -139,11 +157,12 @@ export function Navbar() {
           </div>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav ref={navRef} className="hidden md:flex items-center gap-8 relative">
           {links.map((l) =>
             l.href.startsWith("/") ? (
               <a
                 key={l.name}
+                ref={(el) => { linkRefs.current[l.name] = el; }}
                 href={l.href}
                 onClick={(e) => navigateTo(e, l.href)}
                 className={`nav-link text-base md:text-lg font-semibold relative pb-1 transition-colors ${
@@ -152,13 +171,11 @@ export function Navbar() {
                 style={isActive(l.name) ? { color: "var(--accent)" } : {}}
               >
                 {l.name}
-                {isActive(l.name) && (
-                  <span className="absolute -bottom-0.5 left-0 right-0 h-0.5 rounded-full" style={{ backgroundColor: "var(--accent)" }} />
-                )}
               </a>
             ) : (
               <a
                 key={l.name}
+                ref={(el) => { linkRefs.current[l.name] = el; }}
                 href={l.href}
                 className={`nav-link text-base md:text-lg font-semibold relative pb-1 transition-colors ${
                   isActive(l.name) ? "text-accent" : ""
@@ -167,12 +184,18 @@ export function Navbar() {
                 onClick={(e) => navigateTo(e, l.href)}
               >
                 {l.name}
-                {isActive(l.name) && (
-                  <span className="absolute -bottom-0.5 left-0 right-0 h-0.5 rounded-full" style={{ backgroundColor: "var(--accent)" }} />
-                )}
               </a>
             )
           )}
+          {/* Animated underline indicator */}
+          <span
+            className="absolute -bottom-0.5 h-0.5 rounded-full transition-all duration-300 ease-in-out"
+            style={{
+              left: `${indicatorStyle.left}px`,
+              width: `${indicatorStyle.width}px`,
+              backgroundColor: "var(--accent)",
+            }}
+          />
         </nav>
 
         <div className="md:hidden flex items-center gap-2">

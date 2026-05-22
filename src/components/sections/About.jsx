@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState, useRef, useCallback } from "react";
-import ceoPhoto from "../../assest/CEO_Photo.jpg";
+import ceoPhoto from "../../assest/CEO.jpeg";
 
 function Counter({ from, to, suffix = "", label, useLocale = true, animate = true }) {
   const [count, setCount] = useState(animate ? from : to);
