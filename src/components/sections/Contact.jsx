@@ -240,7 +240,7 @@ export function Contact() {
                     <input
                       type="text"
                       name="name"
-                      placeholder="John Doe"
+                      placeholder="Your Name"
                       required
                       className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors"
                       style={{ backgroundColor: "var(--bg-alt)", color: "var(--text)", border: "1px solid var(--border)" }}
@@ -250,12 +250,12 @@ export function Contact() {
                   </div>
                   <div>
                     <label className="block text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "var(--accent)" }}>
-                      Your Email
+                      Your Email ID
                     </label>
                     <input
                       type="email"
                       name="email"
-                      placeholder="john@example.com"
+                      placeholder="Your Email ID"
                       required
                       className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors"
                       style={{ backgroundColor: "var(--bg-alt)", color: "var(--text)", border: "1px solid var(--border)" }}
@@ -265,12 +265,12 @@ export function Contact() {
                   </div>
                   <div>
                     <label className="block text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "var(--accent)" }}>
-                      Message
+                      Leave Us a Message
                     </label>
                     <textarea
                       name="message"
                       rows={5}
-                      placeholder="Tell us about your project..."
+                      placeholder="Leave Us a Message"
                       required
                       className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors resize-none"
                       style={{ backgroundColor: "var(--bg-alt)", color: "var(--text)", border: "1px solid var(--border)" }}
