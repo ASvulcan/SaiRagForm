@@ -89,7 +89,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2.5">
                 <Phone size={14} className="mt-0.5 shrink-0" style={{ color: "var(--accent)" }} />
-                <span>+91-8668479379</span>
+                <span>+91 8668479379</span>
               </li>
               <li className="flex items-start gap-2.5 leading-relaxed">
                 <MapPin size={14} className="mt-0.5 shrink-0" style={{ color: "var(--accent)" }} />
