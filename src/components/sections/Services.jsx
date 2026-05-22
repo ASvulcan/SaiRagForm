@@ -87,7 +87,7 @@ function ServiceCard({ title, description, items, open, onToggle, icon: Icon, is
       className={`group card relative bg-bg-card backdrop-blur-md border rounded-xl p-7 transition-all duration-500 cursor-pointer ${
         open
           ? "border-accent shadow-2xl shadow-accent-rgb/20 scale-[1.02]"
-          : "border-border/50 hover:border-accent/40 hover:shadow-2xl hover:shadow-accent-rgb/10 hover:-translate-y-2 dark:border-border"
+          : "border-border/50 hover:border-accent/40 hover:shadow-2xl hover:shadow-accent-rgb/10 hover:-translate-y-2"
       }`}
       onClick={onToggle}
       // Use transform for GPU-accelerated animations
@@ -106,7 +106,7 @@ function ServiceCard({ title, description, items, open, onToggle, icon: Icon, is
                 <img 
                   src={Icon} 
                   alt={title} 
-                  className="w-8 h-8 object-contain dark:invert opacity-70 group-hover:opacity-100 transition-opacity duration-500" 
+                  className="w-8 h-8 object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-500"
                   loading="lazy"
                 />
               ) : (

@@ -1,15 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
 import { useLocation } from "wouter";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Logo } from "../ui/Logo";
-import { useTheme } from "../../context/ThemeContext";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const { dark, toggle } = useTheme();
   const [, setLocation] = useLocation();
 
   useEffect(() => {
@@ -175,24 +173,9 @@ export function Navbar() {
               </a>
             )
           )}
-          <button
-            onClick={toggle}
-            className="nav-link p-2 rounded-lg"
-            aria-label="Toggle theme"
-          >
-            {dark ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
         </nav>
 
         <div className="md:hidden flex items-center gap-2">
-          <button
-            onClick={toggle}
-            className="p-2 transition-colors"
-            style={{ color: effectiveTextColor }}
-            aria-label="Toggle theme"
-          >
-            {dark ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="p-2"

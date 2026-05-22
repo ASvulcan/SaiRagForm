@@ -80,12 +80,12 @@ function MouseGlowCard() {
         Word from Our CEO
       </h3>
       <div>
-        <div className="float-none md:float-left mr-0 md:mr-8 mb-6 md:mb-4 shrink-0">
+        <div className="flex justify-center md:block float-none md:float-left mr-0 md:mr-8 mb-6 md:mb-4 shrink-0">
           <img
             src={ceoPhoto}
             alt="Ravindra Vaddavalli - Founder & CEO"
-            className="shadow-lg"
-            style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+            className="shadow-lg rounded-lg"
+            style={{ maxWidth: "100%", width: "280px", height: "auto", objectFit: "contain" }}
           />
         </div>
           <div className="space-y-4 text-sm md:text-base leading-relaxed text-justify" style={{ color: "var(--text-muted)" }}>
