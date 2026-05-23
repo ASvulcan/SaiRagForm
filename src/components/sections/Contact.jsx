@@ -1,10 +1,14 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
+import { Dialog } from "../ui/Dialog";
 
 export function Contact() {
   const formRef = useRef(null);
   const cardRef = useRef(null);
+  const [dialog, setDialog] = useState({ open: false, type: "success", title: "", message: "" });
+
+  const closeDialog = useCallback(() => setDialog((prev) => ({ ...prev, open: false })), []);
 
   const handleMouseMove = useCallback((e) => {
     const rect = cardRef.current?.getBoundingClientRect();
@@ -46,14 +50,29 @@ export function Contact() {
         const data = await response.json();
 
         if (response.ok) {
-          alert("Success! Your message has been sent.");
+          setDialog({
+            open: true,
+            type: "success",
+            title: "Message Sent!",
+            message: "Your message has been sent successfully. We'll get back to you soon."
+          });
           form.reset();
         } else {
-          alert("Error: " + data.message);
+          setDialog({
+            open: true,
+            type: "error",
+            title: "Submission Failed",
+            message: data.message || "Something went wrong. Please try again."
+          });
         }
 
       } catch (error) {
-        alert("Something went wrong. Please try again.");
+        setDialog({
+          open: true,
+          type: "error",
+          title: "Network Error",
+          message: "Something went wrong. Please try again."
+        });
       } finally {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
@@ -292,6 +311,15 @@ export function Contact() {
           </div>
         </motion.div>
       </div>
+
+      {/* Dialog Box */}
+      <Dialog
+        open={dialog.open}
+        onClose={closeDialog}
+        type={dialog.type}
+        title={dialog.title}
+        message={dialog.message}
+      />
     </section>
   );
 }
