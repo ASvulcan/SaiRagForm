@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 // Import local background images from assest folder
 import bg1 from "../../assest/11.jpeg";
@@ -14,12 +14,12 @@ const overlayStyle = {
 };
 
 export function Hero() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % heroImages.length);
-    }, 6000); // Change every 6 seconds (was 5)
+      setActiveIndex((prev) => (prev + 1) % heroImages.length);
+    }, 6000); // Change every 6 seconds
     return () => clearInterval(interval);
   }, []);
 
@@ -30,22 +30,20 @@ export function Hero() {
     >
       {/* Background carousel with crossfade */}
       <div className="absolute inset-0 overflow-hidden">
-        <AnimatePresence mode="wait">
+        {/* Render all images stacked; only the active one is fully visible */}
+        {heroImages.map((src, i) => (
           <motion.img
-            key={currentIndex}
-            src={heroImages[currentIndex]}
+            key={i}
+            src={src}
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
             style={{ objectPosition: "center" }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={false}
+            animate={{ opacity: i === activeIndex ? 1 : 0 }}
             transition={{ duration: 1, ease: "easeInOut" }}
             loading="eager"
-            // Use will-change on the active image only
-            onLoad={(e) => { e.target.style.willChange = "opacity"; }}
           />
-        </AnimatePresence>
+        ))}
       </div>
 
       {/* Dark overlay */}

@@ -98,7 +98,6 @@ function MouseGlowCard() {
           <p>We look forward to the journey ahead.</p>
           <div className="pt-4 border-t" style={{ borderColor: "var(--border)" }}>
             <p className="font-semibold" style={{ color: "var(--text)" }}>— Ravindra Vaddavalli</p>
-            <p className="text-sm" style={{ color: "var(--text-muted)" }}>Founder & CEO, SaiRag Engineering LLP</p>
           </div>
         </div>
       </div>
