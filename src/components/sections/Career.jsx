@@ -86,7 +86,7 @@ export function Career() {
             </span>
 
             <a
-              href="mailto:projects@sairag.net"
+              href="mailto:careers@sairag.net"
               className="group inline-flex items-center gap-3 text-lg md:text-2xl font-medium transition-colors"
               style={{ color: "var(--text)" }}
               onMouseEnter={(e) =>
@@ -96,7 +96,7 @@ export function Career() {
                 (e.target.style.color = "var(--text)")
               }
             >
-              projects@sairag.net
+              careers@sairag.net
 
               <ArrowRight
                 size={20}
